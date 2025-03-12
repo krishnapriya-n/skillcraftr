@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillCraftr Login</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+</head>
+<body class="default-bg"> <!-- Apply default background class -->
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p id="errorMessage" class="error-message"></p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Hardcoded credentials
+    const validUsername = "admin";
+    const validPassword = "1234";
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === validUsername && password === validPassword) {
+        alert("Login Successful!");
+        window.location.href = "get-started.html"; // Redirect to the "Get Started" page
+      } else {
+        errorMessage.textContent = "Invalid username or password.";
+      }
+    });
+  </script>
+
+</body>
+</html>
+

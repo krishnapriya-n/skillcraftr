@@ -1,0 +1,209 @@
+/* General Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+/* Default Background (Login Page) */
+body.default-bg {
+  background: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/website%20home%20page.png') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  padding-top: 450px; /* Default for desktop */
+}
+
+/* Get Started, Info, and Daily Inspiration Page Background */
+body.get-started-bg, 
+body.info-bg,
+body.inspiration-bg {
+  background: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/static.png') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 0;
+}
+
+/* Lower the Container for Info and Inspiration Pages */
+body.info-bg .container, 
+body.inspiration-bg .container {
+  margin-top: 180px; /* Pushes the container down */
+}
+
+/* Mobile View for Homepage Background */
+@media (max-width: 768px) {
+  /* Homepage Background for Mobile */
+  body.default-bg {
+    background: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/mobile%20homepage.jpg') no-repeat center center/cover;
+    padding-top: 300px;
+  }
+
+  /* Get Started, Info, and Daily Inspiration Page Background (Mobile) */
+  body.get-started-bg, 
+  body.info-bg,
+  body.inspiration-bg {
+    background-image: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/mobile%20static.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  /* Adjust position of containers */
+  .container {
+    padding-top: 40px;
+  }
+
+  /* Lower the Info and Inspiration Page container */
+  body.info-bg .container, 
+  body.inspiration-bg .container {
+    margin-top: 80px;
+  }
+}
+
+/* Get Started, Info, and Daily Inspiration Page Background for Smaller Screens */
+@media (max-width: 480px) {
+  body.default-bg {
+    background: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/mobile%20homepage.jpg') no-repeat center center/cover;
+    padding-top: 250px;
+  }
+
+  body.get-started-bg, 
+  body.info-bg,
+  body.inspiration-bg {
+    background-image: url('https://raw.githubusercontent.com/krishnapriya-n/skill-craftr/main/assets/mobile%20static.jpg');
+  }
+
+  .container {
+    padding-top: 20px;
+  }
+
+  /* Lower the Info and Inspiration Page container on small screens */
+  body.info-bg .container, 
+  body.inspiration-bg .container {
+    margin-top: 60px;
+  }
+}
+
+/* Login Box */
+.login-container {
+  background: rgba(53, 43, 43, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(162, 159, 159, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.login-container h1 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #c8c8c8;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.login-container button {
+  background-color: #31020b;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-container button:hover {
+  background-color: #1b0303;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+
+
+/* Centered Container for Get Started, Info & Inspiration Pages */
+.container {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Button Styling */
+.btn {
+  display: inline-block;
+  background-color: #31020b;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  min-width: 150px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #1b0303;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+  /* Center the content */
+  .container {
+    padding: 1rem;
+    width: 90%;
+  }
+
+  /* Button Styling */
+  .btn {
+    font-size: 1rem;
+    min-width: 120px;
+  }
+
+  /* Stack buttons vertically on smaller screens */
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Make the buttons smaller and ensure they fit on small screens */
+  .btn {
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+
+  /* Adjust container padding */
+  .container {
+    padding: 0.8rem;
+  }
+}
