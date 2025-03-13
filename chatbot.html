@@ -3,126 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Chatbot</title>
+    <title>SkillCraftr Chatbot</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            text-align: center;
+            padding: 20px;
         }
         #chat-container {
-            width: 400px;
+            width: 50%;
+            margin: auto;
             background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        #chat-messages {
-            height: 400px;
+        #chat-box {
+            height: 300px;
             overflow-y: auto;
+            border: 1px solid #ddd;
             padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .message {
             margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            max-width: 80%;
+            text-align: left;
         }
-        .user-message {
-            background: #007bff;
-            color: white;
-            align-self: flex-end;
-            text-align: right;
-        }
-        .bot-message {
-            background: #e9ecef;
-            color: black;
-            align-self: flex-start;
-        }
-        #chat-form {
-            display: flex;
+        #user-input {
+            width: 80%;
             padding: 10px;
-            background: #fff;
+            margin-right: 5px;
         }
-        #chat-input {
-            flex-grow: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+        #send-btn {
+            padding: 10px;
             cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
         }
     </style>
 </head>
 <body>
-
     <div id="chat-container">
-        <div id="chat-messages"></div>
-        <form id="chat-form">
-            <input type="text" id="chat-input" placeholder="Type your message..." required>
-            <button type="submit">Send</button>
-        </form>
+        <h2>SkillCraftr Chatbot</h2>
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const chatForm = document.getElementById("chat-form");
-            const chatInput = document.getElementById("chat-input");
-            const chatMessages = document.getElementById("chat-messages");
-
-            chatForm.addEventListener("submit", async function (event) {
-                event.preventDefault();
-
-                const userMessage = chatInput.value.trim();
-                if (!userMessage) return;
-
-                // Display user message in chat
-                const userMessageDiv = document.createElement("div");
-                userMessageDiv.textContent = "You: " + userMessage;
-                userMessageDiv.classList.add("message", "user-message");
-                chatMessages.appendChild(userMessageDiv);
-
-                // Send message to Flask backend
-                const response = await fetch("/chat", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message: userMessage }),
-                });
-
-                const data = await response.json();
-                const botReply = data.response;
-
-                // Display bot response
-                const botMessageDiv = document.createElement("div");
-                botMessageDiv.textContent = "Bot: " + botReply;
-                botMessageDiv.classList.add("message", "bot-message");
-                chatMessages.appendChild(botMessageDiv);
-
-                // Auto-scroll to the latest message
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Clear input field
-                chatInput.value = "";
-            });
+        document.getElementById("send-btn").addEventListener("click", sendMessage);
+        document.getElementById("user-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
         });
-    </script>
 
+        function sendMessage() {
+            let userInput = document.getElementById("user-input").value;
+            if (!userInput.trim()) return;
+
+            let chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+            fetch("http://127.0.0.1:5000/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                chatBox.innerHTML += `<p><strong>Bot:</strong> Error connecting to the server.</p>`;
+            });
+
+            document.getElementById("user-input").value = "";
+        }
+    </script>
 </body>
 </html>
